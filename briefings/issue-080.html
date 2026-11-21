@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>국방 AI 주간 동향 브리핑 제80호</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mobile-first single scrolling brief — sticky header with group tabs, collapsible article cards, vertical archive timeline */
+:root {
+  --bg: #F4F6FA; --panel: #FFFFFF; --panel2: #E9EFF8; --fg: #18202F; --muted: #5B687C;
+  --navy: #14213D; --navy2: #1F3864; --head: #1F3864; --steel: #3F66A0; --steel2: #8FA3C7; --gold: #C9A227; --gold-ink: #14213D;
+  --line: #D5DCE8; --on-navy: #FFFFFF; --on-navy-muted: #CFDAEE; --shadow: rgba(20, 33, 61, .12);
+  --sans: 'Noto Sans KR', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --hh: 104px;
+  --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0C1220; --panel: #151F38; --panel2: #1C2947; --fg: #E9EDF5; --muted: #9BA8BF;
+  --navy: #111B33; --navy2: #27447A; --head: #C9D8F5; --steel: #8AA9DE; --steel2: #4F6896; --gold: #DDBB50; --gold-ink: #14213D;
+  --line: #28385A; --on-navy: #F5F7FB; --on-navy-muted: #B9C6E0; --shadow: rgba(0, 0, 0, .4); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0C1220; --panel: #151F38; --panel2: #1C2947; --fg: #E9EDF5; --muted: #9BA8BF;
+  --navy: #111B33; --navy2: #27447A; --head: #C9D8F5; --steel: #8AA9DE; --steel2: #4F6896; --gold: #DDBB50; --gold-ink: #14213D;
+  --line: #28385A; --on-navy: #F5F7FB; --on-navy-muted: #B9C6E0; --shadow: rgba(0, 0, 0, .4); color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.6;
+  word-break: keep-all; overflow-wrap: anywhere; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
+h1, h2, h3 { line-height: 1.3; text-wrap: balance; }
+ul, ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: var(--gl); padding-right: var(--gr); }
+
+/* ---------- sticky header ---------- */
+.top { position: sticky; top: 0; z-index: 20; background: var(--panel); border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px); box-shadow: 0 2px 10px var(--shadow); }
+.top .row { display: flex; align-items: center; gap: 10px; padding-block: 8px; }
+.top .no { flex: none; width: 34px; height: 34px; border-radius: 6px; background: var(--gold); color: var(--gold-ink);
+  font-weight: 900; font-size: 15px; display: grid; place-items: center; }
+.top .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top .ttl small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+.btn { flex: none; min-height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); font-size: 13px; font-weight: 500; }
+.btn:hover { border-color: var(--steel); }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-block: 0 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; min-height: 34px; padding: 0 12px; border-radius: 17px; border: 1px solid var(--line); background: var(--bg);
+  font-size: 13px; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.chip b { color: var(--steel); }
+.chip.on { background: var(--navy2); border-color: var(--navy2); color: var(--on-navy); }
+.chip.on b { color: var(--gold); }
+.prog { height: 3px; background: var(--line); }
+.prog i { display: block; height: 100%; width: 0; background: var(--gold); }
+
+/* ---------- hero ---------- */
+.hero { background: var(--navy); color: var(--on-navy); padding-block: 36px 32px; }
+.hero .no { width: 64px; height: 64px; border-radius: 8px; background: var(--gold); color: var(--gold-ink); font-weight: 900; font-size: 26px; display: grid; place-items: center; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(28px, 6vw, 48px); font-weight: 900; letter-spacing: -.01em; margin-bottom: 12px; }
+.hero p { color: var(--on-navy-muted); font-size: clamp(14px, 2.2vw, 17px); }
+.hero .sm { font-size: 13px; margin-top: 10px; }
+.hero .arch { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--steel2); }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.hero .wrap > * { animation: rise .6s ease both; }
+.hero .wrap > :nth-child(2) { animation-delay: .08s; } .hero .wrap > :nth-child(3) { animation-delay: .16s; }
+.hero .wrap > :nth-child(4) { animation-delay: .24s; } .hero .wrap > :nth-child(5) { animation-delay: .32s; }
+
+/* ---------- sections ---------- */
+section.blk { padding-block: 28px 8px; scroll-margin-top: var(--hh); }
+.h2 { font-size: clamp(20px, 4vw, 26px); font-weight: 800; color: var(--head); margin-bottom: 14px; }
+.sub { font-size: 14px; font-weight: 700; color: var(--head); margin: 20px 0 10px; }
+.bluf { background: var(--navy); color: var(--on-navy); border-radius: 12px; padding: 16px 18px; }
+.bluf .lab { color: var(--gold); font-weight: 700; font-size: 12.5px; letter-spacing: .08em; margin-bottom: 8px; }
+.bluf li { position: relative; padding-left: 16px; margin-bottom: 10px; font-size: 14.5px; }
+.bluf li:last-child { margin-bottom: 0; }
+.bluf li::before { content: ""; position: absolute; left: 2px; top: .68em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.gcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; margin-top: 14px; }
+.gcard { display: block; text-decoration: none; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; transition: transform .2s ease, box-shadow .2s ease; }
+.gcard:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
+.gcard .hd { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15.5px; color: var(--head); margin-bottom: 6px; }
+.badge { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--navy2); color: #fff; font-weight: 700; font-size: 13px; display: inline-grid; place-items: center; }
+.gcard .msg { font-size: 13.5px; margin-bottom: 8px; }
+.gcard .cnt { font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.gcard .it { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.gcard .n { font-style: normal; font-family: var(--mono); font-size: 10.5px; min-width: 1.7em; height: 1.7em; padding: 0 3px; border: 1px solid var(--steel2); border-radius: 999px; display: inline-grid; place-items: center; color: var(--steel); font-variant-numeric: tabular-nums; }
+.recs { display: grid; gap: 8px; }
+.rec { display: flex; gap: 10px; align-items: flex-start; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+.rec b { color: var(--head); display: block; font-size: 14px; }
+
+/* ---------- group band ---------- */
+.band { background: var(--navy2); color: var(--on-navy); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+.band .k { font-family: var(--mono); font-size: 12px; color: var(--gold); letter-spacing: .08em; }
+.band h2 { font-size: clamp(19px, 4vw, 26px); font-weight: 800; margin: 4px 0 6px; }
+.band p { color: var(--on-navy-muted); font-size: 14px; }
+
+/* ---------- article card ---------- */
+.art { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; scroll-margin-top: var(--hh); }
+.art-h { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+.num { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 15px; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.art-h h3 { font-size: clamp(16.5px, 2.6vw, 20px); font-weight: 800; color: var(--head); }
+.meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.meta b { color: var(--steel); font-weight: 500; }
+.one { background: var(--navy); color: var(--on-navy); border-radius: 10px; padding: 12px 14px; font-weight: 500; font-size: 14.5px; }
+.more { width: 100%; min-height: 42px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  background: var(--panel2); border: 0; border-radius: 8px; padding: 0 14px; font-size: 13.5px; font-weight: 500; color: var(--head); }
+.more .chev { transition: transform .25s ease; }
+.more[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.detail { display: grid; gap: 16px; margin-top: 14px; grid-template-columns: minmax(0, 1fr); }
+.detail > * { min-width: 0; }
+@media (min-width: 900px) { .detail { grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 22px; } }
+.sec h4, .tl h4 { font-size: 14.5px; font-weight: 700; color: var(--head); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.sec li { position: relative; padding-left: 14px; margin-bottom: 8px; font-size: 14.5px; }
+.sec li::before { content: ""; position: absolute; left: 1px; top: .7em; width: 5px; height: 5px; border-radius: 50%; background: var(--steel2); }
+.impl { background: var(--panel2); border-radius: 10px; padding: 12px 14px; margin-top: 14px; }
+.impl li:last-child { margin-bottom: 0; }
+.mk { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: var(--gold-ink); font-size: 12px; font-weight: 700; display: inline-grid; place-items: center; }
+
+/* ---------- timeline ---------- */
+.tl { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: var(--bg); align-self: start; }
+.tl h4 small { font-weight: 400; color: var(--muted); font-size: 11.5px; }
+.tl h4 { flex-wrap: wrap; row-gap: 0; }
+.track { position: relative; padding-left: 48px; }
+.track::before { content: ""; position: absolute; left: 17px; top: 16px; bottom: 16px; border-left: 2px dashed var(--steel2); transform-origin: top; transition: transform .9s ease .1s; }
+.node { position: relative; padding: 6px 0 6px 4px; min-height: 46px; transition: opacity .4s ease, transform .4s ease; transition-delay: calc(var(--i) * .13s + .15s); }
+.node .dot { position: absolute; left: -48px; top: 7px; width: 34px; height: 34px; border-radius: 50%; background: var(--steel); color: #fff; font-family: var(--mono); font-size: 12px;
+  display: grid; place-items: center; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1); transition-delay: calc(var(--i) * .13s + .15s); }
+.node .d { display: block; font-size: 11.5px; color: var(--muted); font-family: var(--mono); }
+.node .t { display: block; font-size: 13.5px; }
+.node.cur { background: var(--panel2); border-radius: 8px; padding: 8px 10px; margin-left: -6px; }
+.node.cur .dot { background: var(--gold); color: var(--gold-ink); width: 40px; height: 40px; left: -51px; top: 5px; font-weight: 700; }
+.node.cur .d { color: var(--steel); font-weight: 500; } .node.cur .t { font-weight: 700; }
+.tl.pre .track::before { transform: scaleY(0); }
+.tl.pre .node { opacity: 0; transform: translateX(14px); }
+.tl.pre .node .dot { transform: scale(0); }
+.trend { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; }
+.trend b { color: var(--steel); margin-right: 6px; }
+
+/* ---------- closing ---------- */
+.close2 { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .close2 { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+.watch { position: relative; padding-left: 26px; }
+.watch::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; border-left: 2px solid var(--steel2); }
+.watch li { position: relative; margin-bottom: 14px; font-size: 14px; }
+.watch li::before { content: ""; position: absolute; left: -25px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); }
+.watch b { display: block; font-family: var(--mono); font-size: 13px; color: var(--head); font-variant-numeric: tabular-nums; }
+footer { padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 12px; text-align: center; }
+
+/* ---------- drawer & fab ---------- */
+.drawer { position: fixed; inset: 0; z-index: 40; background: rgba(8, 12, 24, .55); display: flex; justify-content: flex-end; }
+.drawer .panel { width: min(420px, 100%); height: 100%; background: var(--panel); overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) var(--gr) calc(20px + env(safe-area-inset-bottom, 0px)) 16px; animation: slide .25s ease both; }
+@keyframes slide { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer .ph { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: 800; font-size: 16px; color: var(--head); }
+.drawer .g { margin: 14px 0 4px; font-size: 12.5px; font-weight: 700; color: var(--steel); }
+.drawer a { display: flex; gap: 10px; align-items: baseline; padding: 9px 6px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+.drawer a:hover { background: var(--panel2); }
+.drawer a i { flex: none; width: 2.2em; font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
+.fab { position: fixed; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 15; width: 44px; height: 44px; border-radius: 50%;
+  border: 0; background: var(--navy2); color: var(--on-navy); font-size: 18px; box-shadow: 0 6px 16px var(--shadow); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.fab.show { opacity: 1; pointer-events: auto; }
+html.lock, html.lock body { overflow: hidden; }
+
+@media (max-width: 420px) { .top .ttl small { display: none; } .art { padding: 14px 12px; } .btn { padding: 0 10px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media print { .top, .fab, .more { display: none !important; } .detail[hidden] { display: grid !important; } .art { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="wrap">
+    <div class="row">
+      <span class="no">80</span>
+      <div class="ttl">국방 AI 주간 동향 브리핑<small id="issue"></small></div>
+      <button class="btn" id="allBtn" type="button" aria-pressed="false">전체 펼치기</button>
+      <button class="btn" id="tocBtn" type="button" aria-haspopup="dialog">목차</button>
+    </div>
+    <nav class="chips" id="chips" aria-label="유형 바로가기"></nav>
+  </div>
+  <div class="prog" aria-hidden="true"><i id="prog"></i></div>
+</header>
+<main id="app"></main>
+<footer><div class="wrap" id="foot"></div></footer>
+<div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="목차"><div class="panel" id="panel"></div></div>
+<button class="fab" id="fab" type="button" aria-label="맨 위로">↑</button>
+
+<script>
+const D = {"META":{"title":"국방 AI 주간 동향 브리핑","issue":"국방 AI(AI+IT) 뉴스레터 제80호 (2026. 11. 15. ~ 11. 21.)","no":"80","curdate":"26.11","scope":"23개 주제 · 23개 기사","date":"2026. 11. 21.","author":"국방 AI 혁신 네트워크","archive":"crayon-sim.github.io/defense-ai-newsletter"},"BLUF":["초지능(ASI) 도래 전망이 2031 → 2027~28년으로 단축되고 美 국방부는 CDAO를 '초지능실'로 개편 — 의회는 프론티어 모델 사전 의무 검증, 사이버·AI 조사위원회 입법 추진, GAO는 주요 AI 4종의 안전장치가 12시간 내 우회됨을 확인","美 육군 드론 전력이 '양산·소모' 체제로 전환 — 3천 달러급 자폭드론 제조 로데오(1만 대 옵션), 비축 대신 '소모 후 신규 구매', 시험장 30일 배정, 인태 자율보급 UGV·해군 CCA 조기 전력화, NATO는 우크라이나군을 대항군으로 기용","AI가 사이버 공방의 속도를 바꿈 — 중·북 해커의 AI 자동화 침투 포착, OpenAI는 NATO에 Daybreak 제공(패치 '수분'), FedRAMP 실시간 취약점 규정(12. 7. 시한) / NSANet 3일 장애는 '패치 자체의 위험' 경고, DISA MPE·PQC 이행 본격화"],"GROUPS":[{"code":"Ⅰ","name":"초지능 전망과 AI 안전·통제 입법","short":"초지능·AI 통제","msg":"ASI 도래 2027~28 전망, 프론티어 모델 사전 의무 검증과 사이버·AI 조사위 입법, GAO의 안전장치 우회 실증 — AI 에이전트 통제가 핵심 쟁점","items":[1,15,16,19,22]},{"code":"Ⅱ","name":"드론·무인 전력의 양산·시험·운용","short":"드론·무인 전력","msg":"3천 달러급 자폭드론 양산 검증, 비축 대신 소모·교체, 시험장 민간 개방, 자율보급 UGV·해군 CCA, 우크라이나 대항군으로 교리 혁신","items":[6,8,7,9,10,21]},{"code":"Ⅲ","name":"지휘통제·연합 네트워크·IT 기반","short":"C2·네트워크·IT","msg":"제대 간 데이터 유통 병목, DISA MPE의 데이터 중심 전환과 ZEUS 통합 조달, PQC 이행계획, NSANet 패치 장애 — 기반 체계의 신뢰성","items":[5,12,13,3,14]},{"code":"Ⅳ","name":"AI 시대 사이버 위협과 방어","short":"AI 사이버 공방","msg":"중·북 AI 자동화 해킹의 실전화, OpenAI–NATO Daybreak로 패치 '수분', FedRAMP 실시간 취약점 규정, 사이버 전 직무 AI 필수화","items":[23,20,17,2]},{"code":"Ⅴ","name":"군사교육 개혁과 행정 AI","short":"교육·행정 AI","msg":"PME 개혁의 정치화 논란과 AI·워게임 강화, VA.gov 'SI 친화' 개편, AI 생성 FOIA 청구 폭증 — 인간 최종 판단과 지적 독립성","items":[4,11,18]}],"LABELS":{"1":"ASI 조기 도래 전망","2":"사이버 인력 AI","3":"PQC 이행계획","4":"PME 개혁 논란","5":"육군 데이터 병목","6":"드론 제조 로데오","7":"개방형 시험장","8":"소모 후 신규 구매","9":"자율보급 UGV","10":"해군 CCA 조기화","11":"VA.gov AI 통합","12":"DISA MPE","13":"DISA ZEUS","14":"NSANet 장애","15":"AI 사전 의무 검증","16":"GAO AI 4종 우회","17":"FedRAMP 신규정","18":"AI와 FOIA","19":"사이버·AI 조사위","20":"OpenAI–NATO","21":"우크라 대항군","22":"에이전트 SW 통제","23":"AI 해킹 툴 포착"},"A":{"1":{"label":"초지능 AI(ASI) 조기 도래 전망 — 2031 → 2027~28년","src":"Defense One","one":"METR 'AI 에이전트로 모델 개선 속도 2배' — ASI 예측이 2027~28년으로 단축, 3년 내 '통제 상실' 경고, 美 국방부는 CDAO를 '초지능실'로 개편하고 정책 주기는 6~9개월로 압축","trend":["비영리 AI 평가기관 METR: AI 에이전트 활용으로 Anthropic의 모델 개선 속도가 작년 말 대비 약 2배 — Sentinel·AI Futures Project 등은 초지능(ASI) 도래 시점을 2031년에서 2027~2028년으로 앞당김(기밀 데이터 비공개로 외부 검증엔 한계)","폴 크리스티아노(前 OpenAI·연방 AI 안전연구소): 3년 내 'AI 통제 상실(takeover)' 가능성 경고 — 사이버 해킹으로 전 세계 서버에 자가 복제해 강제 종료를 무력화하고 군용 드론·건설 로봇을 통제할 위험","미 국방부는 CDAO를 '초지능실(Super Intelligence Office)'로 개편 — 전문가들은 정책 수립 주기가 3~5년에서 6~9개월로 단축됐다고 진단, 데이터센터 보안과 모델 탈취·사보타주 방지를 시급 과제로 제시"],"impl":["국방 AI 정책·전략의 개정 주기를 연 단위에서 반기 이하의 상시 갱신 체계로 단축하고, ASI 조기 도래(2027~28) 시나리오를 국방 기획과 미래전 연구의 가정에 반영","국방 AI 데이터센터·모델 가중치 보호(탈취·사보타주 방지)와 자율 에이전트의 자가 복제·권한 확대 차단을 국방 AI 보안 기준의 최우선 항목으로 설정"],"related":[[71,"26.09","하원의원 10인, AI 안전장치 입법 신속 처리 촉구"],[72,"26.09","트럼프, 'AI' 대신 '초지능(SI)' 공식 용어화"],[73,"26.10","미·중 AI 안전 논쟁의 본질 — '통제 vs 속도'"],[74,"26.10","범정부 '초지능 태스크포스(SI Force)' 신설"],[79,"26.11","브루킹스: 중국에 지지 않으면서 AI 속도를 늦출 수 있나"]],"trendline":"안전장치 입법 촉구(9월) → 'SI' 공식 용어화(9월) → '통제 vs 속도' 논쟁(10월) → SI Force(10월) → 브루킹스 '현재 위험'(11월) → ASI 2027~28 전망(11월): 초지능이 '수사'에서 '기획 가정'으로"},"2":{"label":"미 국방부, 사이버 전 직무 훈련에 AI 필수화·실무 중심 채용","src":"DefenseScoop","one":"79개 사이버 직무 훈련 전체에 AI를 기초 역량으로 통합, 학력·경력 대신 사이버 훈련장 30분 실기 평가로 채용 — 인력 24만 명 중 2만 4천 명 부족 해소 목표","trend":["적대 세력의 AI 기반 사이버 위협(자동화 정찰·제로데이 취약점 발굴·사회공학)에 대응해 모든 사이버보안 직무 훈련에 AI를 필수 기초 역량으로 통합하기로 결정","이력서 위주 선발에서 벗어나 제한 시간(30분) 내 AI 도구를 활용해 실제 사이버 훈련장(Cyber Range)에서 직무 과제를 해결할 수 있는지 평가하는 실무 중심(Skills-based) 채용으로 전환","국방부 사이버 인력 총 24만 명 중 약 2만 4천 명 부족(직무 수 76 → 79개 확대) — AI 훈련 우선순위화, 민간 산업계와의 순환 근무 확대, 사이버 인력 서밋(4. 7.~9.) 개최 추진"],"impl":["사이버작전사·각군 사이버 직무 교육과정 전반에 'AI 활용·AI 위협 대응'을 필수 과목으로 편성하고 직무 자격 기준에 AI 역량을 명시","사이버 전문인력(군무원·전문사관) 선발에 학력·경력 대신 사이버 훈련장 실기 평가를 도입하고 민간 기업과의 순환 근무를 제도화"],"related":[[27,"25.11","국방부, 사이버 인재 육성·'도메인 숙달' 수정 계획"],[47,"26.04","DoD CIO, 펜타곤 IT 전면 혁신 4대 계획 제시"],[51,"26.05","연방 CIO 'AI·기술역량을 전 공무원 핵심역량으로'"],[58,"26.06","국방부 CIO '급진적 전환' — 스킬 기반 채용·Cyber RAP"],[61,"26.07","CIO 데이비스의 디지털 우위 전략 — 워파이터 중심"]],"trendline":"인재 육성 계획(25.11) → IT 혁신 4대 계획(4월) → 전 공무원 AI 역량(5월) → 스킬 기반 채용(6월) → 워파이터 중심(7월) → 전 직무 AI 필수화(11월): 사이버 인력 정책이 '자격'에서 'AI 실기 역량'으로"},"3":{"label":"美 국방부, 양자내성암호(PQC) 전략 이행계획 발표 임박","src":"MeriTalk","one":"샨카 수석부CIO(11. 16.): 전 부처 PQC 전환 이행계획 조만간 발표 — 6. 23. 전략과 양자 행정명령의 후속, 2030년 고영향 시스템·2031년 전군 적용 목표","trend":["미 국방부 CIO실은 양자컴퓨팅 기반 보안 위협에 대응하는 전 부처 차원의 PQC 전환 이행계획을 조만간 발표할 예정(소누 샨카 수석부CIO, 11. 16.)","6. 23. 커스틴 데이비스 CIO가 공개한 PQC 전략과 트럼프 대통령의 양자 기술 행정명령을 구체화하는 후속 조치 — 2030년까지 고영향(high-impact) 시스템, 2031년까지 전군에 양자내성암호 적용","급변하는 위협·작전 환경에 맞춰 암호 현대화 속도를 높여야 한다고 강조, 방산·기술 업계에는 국방부 변화에 즉각 부응할 수 있는 높은 통합성·유연성의 솔루션 개발 주문"],"impl":["국방 PQC 전환 '전략'에 이어 연도별 마일스톤·우선순위(고영향 체계 우선)·예산을 담은 '이행계획'을 수립하고 한미 연합 체계의 암호 전환 일정(2030~31)과 동기화","방산업체에 PQC 적용 요구조건(암호 민첩성·SW 전용 전환)을 조기 고지해 무기체계·통신장비 개발에 선반영"],"related":[[32,"25.12","전문가 경고: AI·양자 기술이 사이버 위협 가속"],[39,"26.02","케언크로스, 국가 사이버 전략 6대 축(양자 포함)"],[59,"26.06","국방부 PQC 전략 공개 — 2030 전환·QKD 금지"],[69,"26.09","국방부, 하드웨어 교체 없는 SW 전용 PQC 모색"],[78,"26.11","2030년 PQC 전환 시한 임박 — 국방부의 과제"]],"trendline":"위협 경고(25.12) → 국가 사이버 전략(2월) → 국방 PQC 전략(6월) → SW 전용 솔루션(9월) → 2030 시한 압박(11월) → 이행계획 예고(11월): PQC가 '전략'에서 '이행 일정'으로"},"4":{"label":"헤그세스 PME 개혁안 — '전략적 사고' 함양 실패 비판","src":"Defense One (기고)","one":"'전투 승리 ≠ 정치적 성과' — 개혁안은 작전 차원에 매몰, AI 교육·PME 1.5·워게임 확대는 긍정적이나 감독권 이관·종신재직권 폐지로 정치화·지적 독립성 훼손 우려","trend":["미군은 이라크·아프가니스탄·9개월째 이어지는 이란 분쟁에서 전술·작전 우위를 입증했으나 정치적 해결로 전환하는 데 한계 — 개혁안은 '전쟁 수행·승리'에 매몰되어 억제와 외교·경제·군사 통합의 전략적 사고 함양을 간과(前 국방부 부차관보 대행 기고)","AI 교육 심화, 중간 경력자 대상 'PME 1.5' 신설, 민간 전문성 활용, 실전형 워게임·시뮬레이션 확대는 긍정 평가 — 장관이 지적한 '정체성·합동성 부족'은 이미 일선 전쟁대학에서 개선해 온 사안","PME 감독권을 합참 J7에서 정무직인 인사·준비태세 차관실로 이관하고 민간 교수 종신재직권(Tenure)을 폐지하는 조치 — 교육의 이념화·정치화, 고위 장교의 비판적 검토·소신 조언 능력 저해 우려"],"impl":["국방대·각군 대학의 AI·워게임 교육 확대 시 전술 숙련을 넘어 '억제·범정부 통합 전략'과 AI 판단을 비판적으로 검증하는 전략적 사고 과정을 병행 설계","군 교육기관의 학문적 독립성과 민간 교수진의 안정성은 AI 시대 전략가 양성의 전제 — 교육 감독 체계 개편 시 정치적 중립 장치 유지"],"related":[[32,"25.12","MIT, AI 시대 군 지도자 양성 응용 AI 프로그램 신설"],[53,"26.05","웨스트포인트 생도, 교육으로 자동화 편향 절반 감소"],[53,"26.05","미 해병대, 전 장병 AI 기초과정 연내 이수 의무화"],[61,"26.07","101공수사단, AI 전술기획 한계 — 방책 개발은 인간"],[75,"26.10","해병대 대학교 '인간 vs AI' 워게임 '파이트 클럽'"]],"trendline":"민간 AI 리더 교육(25.12) → 자동화 편향 교육 효과(5월) → 전 장병 AI 기초(5월) → '방책 개발은 인간 필수'(7월) → AI 워게임(10월) → PME 개혁 논쟁(11월): 군 AI 교육이 '도구 숙달'에서 '전략적 판단'으로"},"5":{"label":"미 육군, 제대 간 데이터 유통 병목 — AI 지휘통제 시급","src":"Defense One","one":"'데이터 부족'이 아닌 '데이터 관리·유통 속도'의 문제 — Project Flytrap(폴란드)에서 지휘통제가 '인간의 속도'에 머묾, 소대~사단 양방향 AI C2와 통신·전자전 자동화 필요","trend":["폴란드 Project Flytrap 등 야전 훈련 결과, 전투·통신 부대와 사령부 간 정보 공유·의사결정 속도가 전장 복잡성을 따라가지 못하는 '데이터 관리' 문제 노출 — 위기 징후 식별부터 주파수 변경까지 '인간의 속도'로 작동","육군·방산업계(Anduril, L3Harris 등): 소대급 전술 제대와 사단·군단 간 정보를 신속히 순환시키는 양방향 AI 지휘통제 필수 — 상급 부대 첩보를 하급 제대에 즉시 전파해 초급 장교가 드론 군집에 즉각 대응","5G·6G 통신 환경에서 적 전파 방해를 피해 최적 채널로 자동 전환하는 등 통신·전자전 대응 자동화 — '더 많은 데이터 수집'이 아닌 '빠른 전술 데이터 유통 구조' 구축이 핵심"],"impl":["AI 기반 유·무인 복합전투체계와 지휘통제 고도화의 핵심은 데이터 수집이 아닌 최전방 소부대까지 실시간으로 첩보를 하달하는 '데이터 유통 구조' 설계 — 제대 간 병목을 야전 훈련으로 진단","통신 제한·교란(Denied/Degraded) 환경에서 말단 제대가 독립적으로 판단하도록 경량 전술 AI와 스펙트럼 자동 전환 기술을 우선 확보"],"related":[[23,"25.10","미 육군, NGC2 30개월 내 전력화 목표 제시"],[59,"26.06","NGC2 공통 데이터 레이어 확립 — Anduril 선도"],[74,"26.10","육군, 앤두릴에 최대 18억 달러 NGC2 계약"],[76,"26.10","앤두릴 NGC2–구형 통신체계 통합 '성장통'"],[79,"26.11","NGC2의 과제 — '수천 마일' 작전 거리와 전자전"]],"trendline":"일정 목표(25.10) → 공통 데이터 레이어(6월) → 18억 달러 확대(10월) → 레거시 통합 성장통(10월) → 인태 거리·전자전(11월) → 제대 간 유통 병목(11월): NGC2 과제가 '구축'에서 '말단까지 흐르게'로"},"6":{"label":"미 육군, 소형 자폭드론 대량생산 검증 '제조 로데오' 착수","src":"Breaking Defense","one":"11. 17. 첫 제안요청서 — 대당 3,000달러 이하 1군 자폭드론 400대·지상통제장비 20세트를 3. 1.까지 납품, 美 본토 부품 100%·개방형 아키텍처, 우수 체계에 1만 대 양산 옵션","trend":["전시 장기전에 대비해 저가 드론의 대량생산 역량과 공급망 회복탄력성을 실전 수준으로 검증 — 대당 3,000달러 이하 1군(20파운드 이하) 자폭드론 400대와 지상통제장비 20세트를 내년 3. 1.까지 납품(2. 15.까지 10% 선납)","정부가 배터리·모터·MK118 탄두 키트 등 관급장비(GFE) 제공 — 육군·국방계약관리청(DCMA)이 공장 실사·분해 검사로 본토(CONUS) 외산 부품 완전 배제를 검증, 전자전 환경 비행과 개방형 시스템 아키텍처(OSA) 요구","완성 드론은 내년 3월 제3회 '드론 우세' 건틀릿에서 복합 장애물·고강도 전자재밍·실표적 테스트 — 우수 체계에 최대 1만 대 양산 옵션, 민·관 공동생산 라인 가동과 공급 차단 모의훈련 수행"],"impl":["소형 드론 획득을 '성능 평가'에서 '양산 능력·공급망 검증'으로 확장 — 단가 상한·납기·국산 부품 비율을 조건으로 한 한국형 제조 경연과 관급 핵심부품(배터리·모터·탄두) 표준화","전시 드론 소요 급증에 대비해 민·군 공동생산 라인과 원자재 차단 모의훈련을 방산 동원 계획에 반영"],"related":[[39,"26.02","드론 도미넌스 Gauntlet 평가 25개 업체 선정"],[57,"26.06","'드론 우위 확보' 전략 — 소형 드론 납품 시작"],[58,"26.06","Gauntlet II 종료, 9월 6만 기 추가 발주 예정"],[72,"26.09","전 분대 자폭드론 보급 근접 — 병목은 '조종 인력'"],[75,"26.10","육군, 모든 장비 구매에 '개방형 아키텍처' 의무화"]],"trendline":"건틀릿 25개사(2월) → 납품 시작(6월) → 6만 기 추가 발주(6월) → 병목은 조종 인력(9월) → 개방형 아키텍처 의무(10월) → 제조 로데오(11월): 드론 우세가 '선정·납품'에서 '양산·공급망 검증'으로"},"7":{"label":"미 육군, 신기술 조기 전력화 위한 '개방형 시험장' 확대","src":"MeriTalk","one":"ATEC, 드론·대드론·장거리 화력·저비용 요격체 기업에 시험장 개방 — 신청 후 30일 내 배정(현 평균 33일)·14일 내 피드백, 93개 기업 15건 완료, GPS 교란·재밍 실전 환경","trend":["육군 시험평가사령부(ATEC)가 드론·대드론·장거리 화력·저비용 요격체 등 핵심 신기술의 조기 전력화를 위해 민간 기업의 군 시험장 접근성을 개선 — 신청 후 30일 내 시험장 배정, 평가 후 14일 내 초기 피드백·문서 제공 목표","약 93개 기업(요청)과 협력해 15건 완료·14건 진행 중 — 전용 포털(testrange.army.mil)로 더그웨이·캠프 그레일링과 신규 캠프 애터베리·머스카타턱, 모로코 시험장 등 국내외 시설과 매칭","공군 제746시험대대 등과 협력해 GPS 교란·통신 재밍의 고도 분쟁·전자전 환경 구현(캠프 그레일링 17개 위협 모의 발신기) — 기업의 즉각 보완·재시험 지원, 육군 고위 지도부 대상 초기 평가 보고 준비"],"impl":["국방 시험장(ADD·각군)을 스타트업·중소기업에 개방하는 '신청–배정–피드백' 기한제와 통합 포털 도입 — 드론·대드론 실증의 최대 병목인 시험 공역·전파 환경 접근성 해소","GPS 교란·재밍 등 실전 전자전 환경을 상시 제공하는 시험장을 지정해 북한 전자전 위협 대응 장비의 재시험 주기를 단축"],"related":[[27,"25.11","미 육군, 신속 대드론 팀(RADT) 창설"],[37,"26.01","FAA, 오클라호마·인디애나에 드론 시험 허브 설립"],[46,"26.03","우크라 교훈이 미 육군 드론·훈련·통신을 바꾼다"],[74,"26.10","북부사 대드론 훈련 '팔콘 피크' 도심지 확대"],[77,"26.10","육군, 민간 드론·대드론 시험장 인디애나 2곳 확대"]],"trendline":"대드론 팀 창설(25.11) → FAA 드론 시험 허브(1월) → 우크라 교훈 반영(3월) → 도심 대드론 훈련(10월) → 시험장 2곳 확대(10월) → 30일 배정 체계(11월): 시험 인프라가 '군 전용'에서 '산업계 개방'으로"},"8":{"label":"미 육군, 소형 공격드론 비축 대신 '소모 후 신규 구매' 전략","src":"Breaking Defense","one":"대드론 대응책이 72시간 내 등장하는 진화 속도 — 창고 비축·정비 대신 파손될 때까지 쓰고 최신형으로 교체, 3만 대 중 1만 대 야전 배치, 2군(21~55lb) 이상은 정비 체계 유지","trend":["우크라이나 전장에서 적의 대드론 대응책이 72시간 내 등장하는 등 기술 진화 주기가 매우 빠름 — 소형 드론을 비축하거나 부품 교체·정비하는 대신 실전적 훈련 중 파손될 때까지 운용 후 최신형으로 즉시 교체하는 것이 비용·효율 면에서 유리","헤그세스 장관의 전 분대 드론 배치 지시에 따라 '드론 도미넌스'와 약 550억 달러 규모 국방자율전그룹(DAWG) 사업으로 대규모 도입 — 우선 확보 3만 대 중 1만 대가 야전 부대에 배치되어 파손을 두려워하지 않는 고강도 훈련에 투입","소형 저가 드론은 일회성 소모품으로 취급, ISR·수송 임무의 21~55파운드급(Group 2) 이상 고가 중형 드론은 기존 정비·유지보수 체계 유지 — 전문가들은 회수·전선 유지보수에 대한 명확한 장기 계획 보완 지적"],"impl":["소형 드론을 '장비'가 아닌 '탄약·소모품'으로 분류하는 군수 개념 전환 — 비축·정비 대신 단주기 반복 구매(수개월 단위 최신형 교체) 계약과 훈련 손실 허용 기준 마련","체급별 이원화(소형 = 소모·교체, 중형 이상 = 정비 유지) 군수지원 체계와 훈련용 대량 소모를 전제로 한 예산 편성 방식 검토"],"related":[[9,"25.07","헤그세스, 군에 드론 전력 '대폭 확충' 명령"],[50,"26.04","DAWG 중심 546억 달러 드론·자율무기 투자 계획"],[54,"26.05","드론 도미넌스 '치명성 챌린지' 5개 기업 선정"],[68,"26.08","백악관 첫 '드론 도미넌스' 행사 — 업계 결집"],[78,"26.11","CENTCOM에 드론·대드론 2만 5천 대 긴급 인도"]],"trendline":"확충 명령(25.7) → DAWG 546억 달러(4월) → 치명성 챌린지(5월) → 백악관 드론 도미넌스(8월) → CENTCOM 2.5만 대(11월) → '소모 후 구매'(11월): 드론이 '장비'에서 '소모품' 군수 개념으로"},"9":{"label":"미 육군, 인태 작전용 무인 자율보급체계 시제품 최대 6건 계약","src":"MeriTalk","one":"UGV 기반 자율보급·의무후송 시제품 최대 6건(건당 최대 200만 달러) — 하와이 실증(ACE 27-01) 후 45일 개량·야전 평가로 1~3개사 구매, 현장 병사 피드백 중심 신속획득","trend":["인도·태평양 병력 지원과 병사 위험 감소를 위해 무인 지상차량(UGV) 기반 자율보급·의무후송 시제품 계약을 최대 6건 체결 계획 — 하와이 실증(ACE 27-01) 결과로 약 45일 개량 기간을 부여한 뒤 야전 운용평가를 거쳐 최종 1~3개사 구매","험지·장거리 분산 작전에서 탄약·식량 보급과 부상자 후송(기존 인력 4명 소요) 부담 경감이 목표 — 정글 지형 테스트에서 기동성 부족·높은 무게중심의 안정성 저하, 배터리 수송·한랭지 성능과 내연기관(JP-8) 소음 간 상충이 보완 과제","태평양육군(USARPAC)·전술엣지획득국(G-TEAD)·Army FUZE xTech가 협업해 계약·사업관리 인력을 야전사령부에 전진 배치, 현장 병사 피드백에 가장 큰 평가 비중 — 지형별 데이터를 축적해 유럽 등 타 전구 확대 타진"],"impl":["산악·도서 지형의 탄약·식량 보급과 부상자 후송에 UGV 자율보급 시제를 '현장 실증 → 단기 개량 → 야전 평가 → 소수 구매' 방식으로 도입 — 획득 인력의 야전부대 전진 배치와 병사 피드백 가중 평가","한반도 산악·한랭 환경의 기동성·배터리 성능 데이터를 축적해 UGV 요구조건(전동 vs 내연의 소음·항속 절충)에 반영"],"related":[[19,"25.09","드론 보트·상륙정, 육군 인태 xTech 실험 무대에"],[19,"25.09","육군, VC 방식 'FUZE 프로그램' 출범"],[42,"26.02","육군, 병사 아이디어 신속 무기화 혁신 기관 창설"],[54,"26.05","우크라 지상 로봇, 러시아 공격에 6주간 진지 방어"],[78,"26.11","국방부, 우크라 모델 참고 지상 로봇(UGV) 도입 가속"]],"trendline":"인태 xTech 실험(25.9) → FUZE 출범(25.9) → 병사 주도 혁신 기관(2월) → 우크라 UGV 실증(5월) → UGV 도입 가속(11월) → 자율보급 시제 6건(11월): UGV가 '실험'에서 '전구 맞춤 신속획득'으로"},"10":{"label":"미 해군, F/A-XX 도입 전 협업전투기(CCA) 조기 전력화 추진","src":"Defense One","one":"토티 해군 차관 지명자 인준 청문회 — 2030년대 F/A-XX를 기다리지 않고 F-35 등에 CCA 제어 체계를 우선 통합, 항모 비행단에 저비용 소모성 전력 조기 확보","trend":["윌리엄 토티 해군 차관 지명자가 상원 군사위 인준 청문회에서 2030년대 도입 예정인 차세대 함재기 F/A-XX를 기다리지 않고 운용 중인 F-35 등에 CCA('로봇 윙맨') 제어 체계를 우선 통합해 조기 비행·운용할 계획을 밝힘","향후 50년간 항모 전력을 유지하려면 F-35가 마지막 유인 함재기가 될 수 없어 F/A-XX 개발은 필수 — 동시에 미래 항모 비행단 전투력 강화를 위해 저비용 소모성 자산(attritable)인 CCA의 신속한 도입·통합이 핵심 과제","해군은 지난 9월 보잉을 F/A-XX 개발사로 선정했으나 2027 회계연도 예산안에는 최소 지원만 반영 — 9월 항모 탑재용 CCA 프로토타입 정보제공요청(RFI)을 발행, 10월 공중전 기동 시험을 마친 공군을 뒤쫓아 전력화에 속도"],"impl":["유인 차세대 전투기 일정과 무관하게 운용 중인 전투기에 무인 윙맨 제어 체계를 선(先)통합하는 '무인 우선' 경로 검토 — 해군 함재 무인기 구상에도 적용","CCA급 무인기의 제어 인터페이스·데이터링크 표준을 한미 연합 운용 관점에서 조기 정합(해·공군 공통 표준)"],"related":[[18,"25.09","해군, 항모 운용 CCA 설계 4개 방산업체 선정"],[35,"26.01","해군 F-35 조종사, 태블릿으로 CCA 제어 훈련"],[50,"26.04","美 해군 태평양형 유무인 통합 — 인간 중심 C2"],[64,"26.08","공군 CCA Increment 2, 최대 6개 설계안 전망"],[79,"26.11","공군 CCA 2대, 자율 SW로 첫 공중전 기동 성공"]],"trendline":"해군 CCA 4개사(25.9) → F-35 태블릿 제어(1월) → 태평양형 유무인 통합(4월) → 공군 Increment 2(8월) → 공군 편대 자율 공중전(11월) → 해군 'CCA 먼저'(11월): CCA가 '공군 사업'에서 '해군 조기 전력화'로"},"11":{"label":"美 보훈부, VA.gov AI(초지능) 통합 확대·디지털 현대화","src":"Nextgov/FCW","one":"백악관 America.gov와 연동해 VA.gov를 'SI 친화적'으로 재편 — 참전용사 9만 명 설문 반영(11. 11.): 패스키 로그인·일상어 검색·매직 링크·서류 제출 11 → 3단계","trend":["보훈부(VA)는 백악관이 출범한 AI 기반 대국민 통합 창구 America.gov와 긴밀히 협력해 VA.gov에서 AI(트럼프 행정부 명칭 '초지능·SI') 도구가 원활히 작동하도록 시스템을 재편","약 9만 명의 참전용사 설문을 반영해 11. 11. 주요 기능 개편 — CLEAR·패스키 로그인 추가, 일상 언어 기반 검색 강화, 로그인 없이 문자로 신청 현황을 확인하는 '매직 링크', 서류 제출(QuickSubmit) 11단계 → 3단계 간소화","내년 1월 추가 업데이트를 목표로 점진적 개선 지속 — 신임 연방 CIO 카터 파머와 협의해 타 연방 기관이 벤치마킹할 대표적 AI 도입 선도 부처로 자리매김 추진"],"impl":["국방부·보훈부·병무청 대민 포털(전역·보훈·병역 민원)을 범정부 AI 창구와 연동 가능한 'AI 친화 구조'(일상어 검색·API·간편 인증)로 재설계 — 장병·예비역 설문에 기반한 단계 축소 목표 설정","로그인 없는 처리 현황 알림 등 저위험 서비스부터 AI·간편 인증을 적용하고 개인정보·보안 통제는 병행 강화"],"related":[[38,"26.01","미 보훈부, AI로 보훈 청구 처리 가속"],[57,"26.06","VA OIT, AI로 SW 개발 주당 평균 8시간 절감"],[65,"26.08","VA, 연방 EHR 활용 AI 챗봇 'VA ChatEHR' 도입"],[70,"26.09","행정명령, VA–국방부 재향군인 기록공유 현대화"],[73,"26.10","AI 기반 대국민 단일 포털 'America.gov' 출범"]],"trendline":"보훈 청구 AI 가속(1월) → 개발 생산성(6월) → VA ChatEHR(8월) → VA–국방부 기록공유(9월) → America.gov 출범(10월) → VA.gov 'SI 친화' 개편(11월): VA가 '내부 효율'에서 '대민 AI 창구'로"},"12":{"label":"DISA, 태평양·유럽 전구 '임무파트너환경(MPE)' 현대화 본격화","src":"","one":"10. 1. 공군에서 MPE 인수 — INDOPACOM 연합정보환경(CIE) 최우선, 제로트러스트·ACP 240 기반 데이터 중심 공유로 전환, 2027년 초 최소기능역량(MVC), Gemini 번역 도구 시제","trend":["DISA는 10. 1. 공군으로부터 MPE 인력·사업을 완전 인수, 10월 주요 작전 연습의 교훈을 바탕으로 인도·태평양 전구(INDOPACOM) 내 연합정보환경(CIE) 확장에 역량 집중 — 이후 유럽사령부(EUCOM)·NATO 연합군으로 확대","네트워크 중심 공유에서 벗어나 제로트러스트와 표준 보안 규격(ACP 240)을 적용한 통합 데이터 패브릭 구축 — 동맹국이 자국 장비를 그대로 쓰면서 정보 객체 단위로 암호화·접근 통제된 기밀을 실시간에 가깝게 공유, 2027년 초 MVC 목표","9월 출범한 기술 인큐베이터로 민간 협력 강화 — 연합작전의 언어 장벽 해소를 위한 구글 제미나이(Gemini) 기반 자연어 번역 도구, 전술 환경 연동 키트 등 비전통 민간 솔루션을 신속히 프로토타이핑"],"impl":["한·미 연합 및 다국적 정보 공유가 '망 분리'에서 '데이터 중심 보안(ACP 240)'·'AI 기반 상호운용성'으로 재편 — 연합 C4I 체계의 객체 단위 암호화·접근통제 표준 대응과 MVC(2027년 초) 참여 준비","연합작전용 AI 번역(한–영 군사 용어) 도구를 한미 공동 개발·검증 과제로 제안해 언어 장벽 해소와 데이터 주권을 동시에 확보"],"related":[[18,"25.09","DISA, 다중 파트너 클라우드(MPE) 가속화 추진"],[25,"25.11","'우리 데이터는 어디에?' 인태 전구 AI 준비 과제"],[56,"26.06","DISA ICAM·Thunderdome 획득 — ZT 확장 전략"],[78,"26.11","DISA 인태 연합 네트워크 격차 해소·제로트러스트"],[79,"26.11","DISA 전사 ICAM 프로토타입 공모"]],"trendline":"MPE 가속(25.9) → 인태 데이터 공백(25.11) → ICAM·Thunderdome(6월) → 인태 연합망 ZT(11월) → 전사 ICAM(11월) → MPE 인수·데이터 중심 전환(11월): 연합 공유가 '망 연결'에서 '객체 단위 보안'으로"},"13":{"label":"DISA, 차세대 통합 IT 조달체계 'ZEUS' 도입 검토","src":"MeriTalk","one":"SETI(75억 달러)·ENCORE III(175억 달러) 만료(2028~30)에 대비해 두 계약의 핵심을 결합한 후속 조달체계 구상 — 저활용 기능 폐기, 범용 서비스는 GSA로, 2027년 초 RFI","trend":["DISA는 대형 IT 조달 계약 SETI(75억 달러 규모)와 ENCORE III(175억 달러 규모)의 만료 시점(2028~2030)이 다가옴에 따라 두 프로그램의 핵심 기능을 결합한 차세대 후속 조달체계 'ZEUS(가칭)' 구축을 검토","기존 계약의 우수 요소는 승계하되 비효율·저활용 기능은 과감히 폐기하고, 일반 범용(commodity) 서비스는 미 조달청(GSA)을 통해 확보하는 등 조달 구조를 정예화","구체적 계약 구조·규모는 아직 미정 — 2027년 초 정보제공요청서(RFI) 발행을 시작으로 방산업계 의견을 수렴하며 본격적인 사업 구체화에 착수"],"impl":["국방 정보화 사업의 유사·중복 계약 수단을 통합하고 범용 IT(클라우드·SW 라이선스)는 조달청 전문계약으로 이관해 국방 고유 영역에 획득 역량을 집중하는 구조 검토","다년 통합 계약 만료 2~3년 전부터 업계 의견 수렴(RFI)으로 후속 체계를 설계하는 일정 관리 방식을 국방 IT 획득에 적용"],"related":[[13,"25.08","DISA, FY2026 2분기 JWCC Next 출범 예정"],[31,"25.12","DISA '국방부 획득 개혁 기조에 맞춰 순조'"],[59,"26.06","DISA, JWCC 후속 클라우드 마켓플레이스 3단계 개편"],[65,"26.08","국방부 CIO, IT 카테고리 관리(ITCM) 신규 정책"],[70,"26.09","국방부, 차세대 대형 클라우드 계약 1차 공고"]],"trendline":"JWCC Next 예고(25.8) → 획득 개혁 정합(25.12) → 클라우드 마켓플레이스 개편(6월) → IT 카테고리 관리(8월) → 대형 클라우드 공고(9월) → ZEUS(11월): 국방 IT 조달이 '개별 계약'에서 '통합·정예화'로"},"14":{"label":"NSA 기밀 통신망 'NSANet' 3일 장애 — 원인은 PHP 패치","src":"Nextgov/FCW·Defense One","one":"외부 해킹이 아닌 취약점 대응 PHP 패치 과정의 시스템 충돌 — SIGINT 수집은 유지됐으나 본부·조지아 거점 출근 분산, FAA·MS 등 연쇄 장애와 맞물려 국가사이버국장 경질","trend":["NSA 기밀 통신망 NSANet에서 약 3일간 대규모 접속 장애 후 복구·정상 운영 — 장애 기간 본부(메릴랜드)·조지아 거점 인력의 출근 시간 분산(Code Orange) 조치, 핵심 임무인 해외 신호정보(SIGINT) 수집은 차질 없음","원인은 외부 해킹이 아닌 단순 기술적 결함 — 제이 클레이턴 국가정보장(DNI) 의회 증언: 최근 발견된 취약점 해결을 위한 오픈소스 웹 소프트웨어 PHP 패치 작업 과정에서 시스템 충돌 발생","FAA 전국 항공기 이륙 중단, 마이크로소프트·금융권 전산 마비 등 연이은 인프라 장애와 맞물려 의회 집중 추궁 — 백악관 국가사이버국장 경질(국방부 CIO 커스틴 데이비스가 인수) 등 사이버 지휘부 개편의 직접적 배경"],"impl":["적대 세력의 공격이 아니어도 긴급 보안 패치 자체가 핵심망 마비로 이어질 수 있음 — 국방망·기밀망 SW 업데이트의 사전 검증(시험 환경)·단계적 적용·롤백 절차를 일제 점검","AI로 취약점 공개–악용 간격이 단축되는 상황에서 '신속 패치'와 '가용성'의 상충을 관리할 패치 거버넌스(위험 등급별 적용 기한·예외 승인)를 국방 사이버 지침에 명문화"],"related":[[39,"26.02","케언크로스, 국가 사이버 전략 6대 핵심 축 공개"],[70,"26.09","NSA, 데이터 분석 지원용 AI 도입 추진"],[71,"26.09","NSA 5대 미션센터 신설 — 10년 만의 최대 개편"],[73,"26.10","케언크로스 국가사이버국장 'AI 안전·신속 배치'"],[74,"26.10","DNI 제이 클레이턴, 백악관 AI 차르 겸직 임명"]],"trendline":"국가 사이버 전략 6축(2월) → NSA AI 도입(9월) → NSA 최대 조직개편(9월) → 국가사이버국장의 AI 논의(10월) → DNI의 AI 차르 겸직(10월) → NSANet 장애·지휘부 교체(11월): 사이버 리더십이 '운영 신뢰성' 시험대로"},"15":{"label":"미 의회, 고위험 AI 모델 사전 의무 검증·CISA 역량 강화 추진","src":"MeriTalk","one":"고트하이머 의원(11. 17.): 프론티어 모델 출시 전 NSA 의무 평가(30~60일, 사이버·CBRN) 법안, 중국산 오픈웨이트 AI 정부 사용 금지 법안, CISA FY27 예산 26.8억 달러","trend":["American AI Security Act: 행정부의 자율적 AI 보안 행정명령을 넘어 파운데이션 모델 개발사가 출시·중대 변경 전 NSA에 모델과 훈련·안전 테스트 정보를 의무 제출하는 초당적 법안 — NSA·국방부·상무부가 30일(최대 60일) 내 사이버·CBRN 악용 가능성을 평가, 권고 이행이 배포의 전제","China FIREWALL Act of 2026: 정부 기기 내 중국산 오픈웨이트(open-weight) AI 모델 사용을 금지하고 해당 모델에 기반한 소프트웨어의 연방 기관 구매를 차단하는 법안 별도 추진","전력망·병원·수자원 등 기반시설 방어를 위한 CISA 인력·도구 확보 강조 — 상원 세출위는 FY2027 CISA 예산을 약 7,700만 달러 증액한 약 26억 8,000만 달러로 편성(핵심 인력 6,000만 달러 이상, AI 모의해킹·레드팀 최소 500만 달러)"],"impl":["국방 도입 AI 모델에 대한 '배포 전 의무 평가'(사이버·CBRN 악용 가능성, 레드팀)를 국방인공지능법안·훈령에 반영하고 평가 전담 조직과 기한(30~60일)을 명시","중국산 오픈웨이트 모델과 이를 내장한 SW의 국방·방산 네트워크 사용 실태를 점검하고 조달 배제 기준 마련 — 美 법제화 시 연합 체계 연동 조건이 될 가능성에 대비"],"related":[[54,"26.05","행정명령, NSA에 자발적 AI 모델 테스트 역할 부여 전망"],[56,"26.06","프론티어 AI 감독 행정명령 — 자발적 사전 검토"],[74,"26.10","하원 민주당, CISA 'AI 보안 TF' 신설 법안 재발의"],[76,"26.10","DHS, 연방 민간기관 DeepSeek 제거·조달 금지 명령"],[79,"26.11","트럼프, CISA 국장에 팔란티어 CISO 로사피오 지명"]],"trendline":"NSA 자발적 테스트 구상(5월) → 자발적 사전 검토 행정명령(6월) → CISA AI 보안 TF 법안(10월) → DeepSeek 퇴출(10월) → CISA 국장 지명(11월) → 의무 검증 법안(11월): 프론티어 AI 통제가 '자발'에서 '의무'로"},"16":{"label":"GAO, 주요 생성형 AI 4종의 공격 기획 악용 취약점 확인","src":"MeriTalk","one":"2026년 봄 비밀 모의 테스트(11. 18. 공개) — Claude·Gemini·Grok·ChatGPT 모두 12시간 내 안전장치 우회, 폭발물 대량살상·전력망 공격 계획이 '대체로 실행 가능' 판정","trend":["GAO가 2026년 봄 실시해 11. 18. 공개한 비밀 모의 테스트: Claude·Gemini·Grok·ChatGPT 등 미국 대표 생성형 AI 4종 모두 자체 안전장치(거부·계정 정지 등)가 우회될 경우 실제 공격 기획에 활용 가능한 정보를 제공","두 플랫폼에는 '폭발물을 이용한 대량 살상', 나머지 두 플랫폼에는 '전력망 공격을 통한 경제적 피해' 시나리오 부여 — 초기 차단 기능은 작동했으나 12시간 이내에 보호 조치를 우회해 실행 가능성이 높은(largely viable) 공격 계획 도출","조사를 의뢰한 매기 하산 상원의원: AI 기반 공공안전 위협이 더 이상 이론적 수준이 아님을 입증 — 신속한 AI 안전 입법과 상원 국토안보위의 기반시설 위험 청문회 개최 촉구(11. 18. 성명)"],"impl":["적대 세력의 상용 AI 악용(테러·기반시설 공격 기획)을 전제로 군 기지·국가 기반시설 방호 위협 평가를 갱신하고, 국방 도입 상용 모델의 안전장치 우회 내성을 자체 레드팀으로 주기 검증","국방 생성형 AI 플랫폼의 사용 로그·이상 질의 탐지·계정 통제 기준을 강화해 내부자·탈취 계정에 의한 악용 차단"],"related":[[21,"25.10","군사 AI에는 가드레일이 필요하다 — 유용성 유지 위해"],[42,"26.02","미군 지도부, Anthropic에 Claude 가드레일 완화 압박"],[65,"26.08","GPT-5.6 연방 서비스 — 자율 사이버공격 사건 직후"],[70,"26.09","러시아, Claude 악용해 자율살상드론·사이버공격 수행"],[71,"26.09","하원의원 10인, AI 안전장치 입법 신속 처리 촉구"]],"trendline":"가드레일 필요론(25.10) → 가드레일 완화 압박(2월) → 자율 사이버공격 사건(8월) → 러시아의 Claude 악용(9월) → 안전장치 입법 촉구(9월) → GAO 실증(11월): AI 오용 위험이 '논쟁'에서 '감사로 입증된 사실'로"},"17":{"label":"FedRAMP, AI 기반 공격 대응 위한 클라우드 취약점 규정 강화","src":"Federal News Network","one":"550여 인증 클라우드에 실시간·위협 기반 취약점 관리(VDR·VER) 의무화 — 12. 7.까지 전환, '27. 3. 8. 미이행 시 인증 취소·1년 재진입 금지, 분기별 비상 테스트 도입","trend":["Claude Mythos 등 AI 모델의 사이버 공격 역량 고도화와 '블랙 옥토버' 보안 사고, CISA 7월 운영 지침(BOD)에 대응해 취약점 탐지·대응(VDR)과 평가·보고(VER) 규정 도입 — 월간 정기 스캔·심각도 점수 의존에서 인터넷 노출과 실제 악용 가능성을 평가하는 '노출·위협 기반' 접근으로 전환","모든 인증 클라우드 서비스는 2026. 12. 7.까지 신규 규정으로 전환, 미달성 시 시정조치계획(CAP) 제출로 2027. 3. 7.까지 3개월 유예 — 3. 8.까지 전환을 완료하지 못하면 FedRAMP 인증 즉시 취소, 1년간 재진입 금지","12월 초부터 분기별 '보안 수신함 비상 테스트' 실시, 미응답 시 최소 30일간 마켓플레이스 시정 상태로 전환·후속 미조치 시 인증 박탈 — 연례 서류 중심에서 자동화된 실시간 모니터링으로 가는 FedRAMP 20x의 일환"],"impl":["국방 클라우드 보안인증(D-CSAP) 설계에 '연 1회 서류 심사'가 아닌 실시간·위협 기반 취약점 관리(노출·악용 가능성 평가)와 미이행 시 인증 취소 제재를 반영","국방 클라우드 사업자의 비상 연락·대응 체계에 대한 불시 점검(분기별)과 시정 기한제를 계약 조건에 포함"],"related":[[20,"25.09","GSA, FedRAMP 20x 2단계 공식 착수"],[46,"26.03","FedRAMP 승인 클라우드 서비스 500개 돌파"],[53,"26.05","FedRAMP 20x 개혁 실행 — 승인 → 통보 전환"],[59,"26.06","FedRAMP 2026 통합 인가 규칙 확정 — '27. 1. 의무화"],[64,"26.08","OMB '규제 준수 부담이 AI 사이버 방어 도입 지연'"]],"trendline":"20x 2단계(25.9) → 승인 500개(3월) → 승인 → 통보 전환(5월) → 통합 인가 규칙(6월) → 규제 부담 논쟁(8월) → 실시간 취약점 규정·인증 박탈(11월): 클라우드 인증이 '연례 서류'에서 '상시 위협 대응'으로"},"18":{"label":"AI 확산에 따른 정보공개청구(FOIA) 환경 변화와 기관 대응","src":"Nextgov/FCW","one":"FY25 FOIA 170만 건(+13%)·평균 대기 240일 초과, 청구인도 AI로 50~100건 동시 생성 — 분류·요약 등 검증 가능한 업무만 AI, 비공개·가림 결정은 인간 최종 승인","trend":["2025 회계연도 연방정부 FOIA 청구는 전년 대비 13% 증가한 약 170만 건으로 사상 최고, 평균 처리 대기 240일 초과 — 청구인들까지 AI로 대량 청구를 생성·제출(단시간 50~100건 동시 접수)해 수작업 처리의 한계와 소송 리스크 확대","문서 분류·요약·초동 분석·관련 자료 식별 등 결과 검증이 가능하고 범위가 명확한 업무에는 AI를 적극 도입 — 최종 비공개 결정이나 민감정보 가림(Redaction) 등 법적 책임이 따르는 고위험 판단은 전문 담당자의 최종 검토·승인","폭증하는 청구에 대응해 유사 청구 병합 처리와 자주 찾는 공공 정보의 사전 공개 확대 — 민간 AI 도구 도입 전 보안·개인정보·연방 기록 보존·감사 추적 요건을 충족하는 거버넌스를 선제 설계"],"impl":["국방 정보공개·민원·국회 자료 요구에 AI 생성 대량 청구가 유입될 것에 대비 — 접수·분류·유사 건 병합은 AI로 자동화하되 비공개·군사기밀 가림 판단은 담당자 최종 승인 원칙을 명문화","자주 청구되는 비기밀 국방 정보의 사전 공개를 확대하고 AI 처리 과정의 감사 추적·기록 보존 기준 마련"],"related":[[50,"26.04","연방정부, AI 도입 속도가 권한 배정 속도를 추월"],[69,"26.09","국가기록원 'AI 사용이 자동으로 연방 기록은 아니다'"],[78,"26.11","하원 민주당, 백악관 Grok 활용 기록 보존 요구"],[78,"26.11","메디케어 AI 심사(WISeR) 시범사업 초기 난항"],[79,"26.11","공공부문 책임 있는 AI — '참모이지 보스가 아니다'"]],"trendline":"권한 배정 공백(4월) → 'AI 사용 ≠ 연방 기록'(9월) → Grok 기록 보존 요구(11월) → AI 심사 역풍(11월) → '참모이지 보스가 아니다'(11월) → FOIA 대응(11월): 행정 AI가 '도입'에서 '기록·책임·인간 승인'으로"},"19":{"label":"미 의회, 초당적 사이버·AI 조사위원회 등 3대 법안 추진","src":"Nextgov/FCW","one":"FAA·MS·NSANet 연쇄 장애 계기 — ROOT CAUSE Act(CISA 산하 독립 조사위), AI INSIGHT Act(연방망 AI 에이전트 식별·추적·최소 권한), SECURE IT Act(패치·롤백 협력)","trend":["ROOT CAUSE Act(루트렐·토레스 의원): CISA 산하에 독립 국가 사이버·AI 조사위원회 설치 — 외부 해킹뿐 아니라 결함 있는 업데이트, 설정 오류, 권한을 이탈한 AI 오작동 등 대규모 IT 장애의 근본 원인 조사, 행정부의 임의 해체·보고서 수정 금지(국방·NSANet 등 국가안보시스템은 제외)","AI INSIGHT Act(밴 엡스 의원): 연방 민간 네트워크의 AI 에이전트를 식별·추적하고 권한을 최소한으로 제한 — AI가 권한을 초과하면 공급업체 승인 없이도 기관이 즉각 접근 차단, AI 기반 의사결정의 증거 보존 의무 부여","SECURE IT Act(오글스 의원): CISA와 IT 기업 간 취약점 패치·결함 업데이트 복구 협력 명문화 — 상원에서도 백악관 초지능 TF에 금융권 등의 악성 AI 에이전트 식별과 AI 기반 방어 확충을 촉구"],"impl":["국방·정보 시스템은 美 입법 대상에서 제외됐으나 민간 클라우드·SW 공급망 장애의 작전 파급은 동일 — 국방 IT 대형 장애와 AI 오작동의 근본 원인을 독립적으로 조사하는 상설 절차 마련","국방망 내 AI 에이전트의 식별·행위 추적·최소 권한·즉시 차단과 의사결정 증거 보존을 국방 AI 에이전트 운용 지침에 선제 반영"],"related":[[52,"26.05","CISA, Agentic AI 도입 '신중한 접근' 가이드 발표"],[74,"26.10","하원 민주당, CISA 'AI 보안 TF' 신설 법안 재발의"],[76,"26.10","초당적 법안, NIST에 AI 모델 보호·방어 표준 지시"],[78,"26.11","NIST, AI 사고 대응·자율 에이전트 통제 로드맵"],[79,"26.11","워킨쇼 의원, FITARA 부활·연방 IT·사이버 개혁 추진"]],"trendline":"에이전틱 AI 신중론(5월) → CISA AI 보안 TF 법안(10월) → AI 사이버 방어법(10월) → NIST 사고대응 로드맵(11월) → FITARA 부활(11월) → 조사위 법안(11월): 의회 감독이 '표준 지시'에서 '사고 원인 규명·에이전트 통제'로"},"20":{"label":"OpenAI, NATO에 최첨단 사이버보안 AI 'Daybreak' 제공","src":"Defense One","one":"11. 17. NATO Edge(이즈미르) 발표 — 미 정부 대상 취약점 탐지·수정 프로그램을 동맹국으로 확장, Crossed Swords에서 자율 AI 에이전트 첫 투입, 패치 소요 '수개월 → 수분' 목표","trend":["OpenAI는 11. 17. 튀르키예 이즈미르의 NATO Edge 컨퍼런스에서 최첨단 AI 모델을 NATO 회원국 정부에 제공한다고 발표 — 5월 미 정부·공인 기관 대상 SW 취약점 탐지·수정을 위해 출범한 Daybreak(Anthropic의 Project Glasswing과 유사)를 동맹 차원으로 확장","이달 초 에스토니아 탈린의 NATO 사이버 훈련 Crossed Swords에서 참가자들이 최초로 온프레미스 AI와 Daybreak로 자율형 AI 에이전트를 직접 구축·배치 — 러시아의 AI 기반 사이버 공격 급증 속에 취약점 발견부터 패치까지를 '수분' 단위로 단축하는 것이 목표","NATO 통신정보국(NCIA)은 2027년 말까지 회원국 자체 AI 예산과 별도로 클라우드·우주 서비스·AI 분야에 30억 달러 이상의 민간 계약 발주 계획 — 민·군 협력 기반 '에이전틱 AI' 도입이 동맹 전반에서 가속"],"impl":["美 프론티어 AI 기업의 사이버 방어 프로그램(Daybreak·Glasswing)이 동맹 단위로 확장 — 한국의 접근 자격·조건(온프레미스 운용, 데이터 주권)을 한미 사이버 협력 의제로 조기 협의","사이버작전사 훈련에 자율 AI 에이전트 기반 취약점 탐지–패치 자동화를 도입하고 '패치 소요 시간'을 국방 사이버 방어의 핵심 성과지표로 설정"],"related":[[48,"26.04","Project Glasswing·Claude Mythos — 취약점 탐지 AI"],[52,"26.05","국방부 기술관계자 'Mythos급 AI가 사이버 방어 혁신'"],[52,"26.05","육군·빅테크 'AI TTX 2.0' — Agentic AI 방어 실증"],[58,"26.06","CISA, Mythos 접근 확보 — Glasswing 40개 기관 확대"],[62,"26.07","백악관, AI 취약점 통합 대응 플랫폼 'Gold Eagle'"]],"trendline":"Glasswing·Mythos(4월) → 'Mythos급 AI' 방어 혁신론(5월) → AI TTX 2.0 실증(5월) → CISA Mythos 접근(6월) → Gold Eagle(7월) → NATO 제공(11월): 프론티어 사이버 AI가 '미 정부 한정'에서 '동맹 공유 자산'으로"},"21":{"label":"NATO, 우크라이나군을 연합훈련 '대항군(Red Team)'으로 기용","src":"Breaking Defense","one":"ACT 반디에 사령관: 전술 '적응 주기' 촉발 위해 우크라이나 병력·무인수상정(USV)을 대항군으로 투입 — REPMUS 2025에서 5전 전승, '파이트 클럽'으로 드론 군집 임계점 시험","trend":["NATO 연합변혁사령부(ACT) 피에르 반디에 사령관은 연합군의 전술적 '적응 주기(adaptation cycle)'를 촉발하기 위해 우크라이나 병력과 자국산 무인수상정(USV)을 훈련 대항군으로 투입 — 2025년 포르투갈 REPMUS 훈련에서 우크라이나 대항군이 5개 해상 전투 시나리오 모두 NATO 병력을 제압","현대 상륙작전은 해상·공중 드론 위협이 동등하게 존재해 대드론 방어와 군집(Swarm) 공격 대응 능력이 필수 — NATO 합동전투센터는 5개년 캠페인의 전략 토론 포럼 '파이트 클럽'을 가동해 가상 군사 시나리오로 함대가 마비되는 드론 군집의 임계점을 시험","지중해 내 러시아 해군 주둔 규모는 크게 줄어 9월 초까지 약 두 달간 활동 공백 — 그러나 야센(Yasen)급 신형 원자력 추진 공격잠수함 등 수중 전력 증강 속도는 유지되어 대잠수함전(ASW)은 여전히 핵심 우려"],"impl":["실전 경험 보유국을 대항군으로 활용하는 방식을 한미·다국적 연합훈련에 접목 — 무인수상정·드론 군집을 운용하는 전문 대항군 부대를 편성해 해군·해병대 상륙·연안 방어 교리의 '적응 주기' 단축","드론 군집 포화 공격에 대한 함대·기지 방어의 임계점(동시 대응 한계)을 워게임으로 사전 식별하고 대드론 소요에 반영"],"related":[[23,"25.10","미 해군 로보틱스 TF, NATO와 발트해 합동 훈련"],[53,"26.05","NATO Crystal Arrow, UGV 통합 — Ark-1 대항군 투입"],[60,"26.07","우크라 Sea Baby USV, FPV 드론 발사대로 진화"],[62,"26.07","우크라 드론 500만 대 — '나토가 따라가야'"],[76,"26.10","DIU, 무인수상정 경연 'SWAP-USV' 2단계 착수"]],"trendline":"NATO 발트해 로봇 훈련(25.10) → Crystal Arrow 대항군(5월) → Sea Baby 진화(7월) → '나토가 따라가야'(7월) → SWAP-USV 경연(10월) → 우크라 대항군 기용(11월): 우크라이나가 '지원 대상'에서 'NATO의 교관·대항군'으로"},"22":{"label":"AI 에이전트 시대, 소프트웨어 거버넌스의 패러다임 전환","src":"InfoWorld","one":"코드 제안을 넘어 테스트·배포까지 수행하는 자율 에이전트 — 사후·문서 중심 통제에서 개발 워크플로에 내재된 통제로: 감사 추적·최소 권한·고위험 작업 인간 승인","trend":["기존 AI 보조 도구는 개발자 검토 후 코드가 반영됐으나 AI 에이전트는 다중 파일 수정·테스트·배포 등 다단계 작업을 자율 실행 — 의사결정과 실행 간격이 극도로 짧아져 인간이 모든 단계를 감독하기 어렵고, 개발자 역할은 '작업 위임·결과 검증'으로 재편","보안·규정 가이드라인만으로는 통제 불가, 개발 환경 자체에 3대 통제 내재화 — ①감사 추적(변경 코드·수신 지시·수행 테스트 전부 기록) ②최소 권한(코드 수정 권한과 운영 인프라·배포 설정 변경 권한 분리) ③핵심 시스템·인프라 변경 등 고위험 작업에만 인간 최종 승인 강제","다단계 작업은 막대한 컴퓨팅·토큰 비용을 소모 — 사용량이 아닌 실제 업무 성과를 측정·제어하는 '소프트웨어 하네스' 계층 필요, AI가 생성한 소프트웨어의 장애 책임은 에이전트가 아닌 조직에 귀속"],"impl":["국방 SW 개발(DevSecOps)에 코딩 에이전트를 도입할 때 '감사 추적·최소 권한·고위험 변경 인간 승인' 3대 통제를 파이프라인에 내재화하고 무기체계·운영 환경 변경 권한은 에이전트에서 분리","AI 생성 코드의 결함·장애 책임 소재(사업 관리 조직·승인권자)를 국방 SW 획득·운영 지침에 명시하고 에이전트 비용·성과 측정 체계 마련"],"related":[[50,"26.04","국방부 5주 만에 10만 AI 에이전트 — '바이브 코딩'"],[52,"26.05","연방기관 Agentic AI 도입 가속화와 거버넌스 공백"],[71,"26.09","국방부 CIO, AI 지원 SW 개발 지침(AMS) 발표"],[76,"26.10","GSA, LLM 정부 계약 신규 보안·통제 규정 발효"],[77,"26.10","육군, SW 보안 심사 '프로젝트 게이트키퍼' 출범"]],"trendline":"10만 에이전트·바이브 코딩(4월) → 거버넌스 공백(5월) → AI 지원 SW 개발 지침(9월) → 에이전트 감사추적 계약 규정(10월) → AI 보안 심사 자동화(10월) → 워크플로 내재 통제(11월): 에이전트 통제가 '정책'에서 '엔지니어링'으로"},"23":{"label":"미 항공우주 부문 겨냥 AI 해킹 툴 포착 — 적성국 위협 고도화","src":"Nextgov/FCW","one":"구글 위협 인텔리전스: 중국 연계 공개 침투 프레임워크 'Cairn'으로 美 항공우주 기관 해킹, 북한은 가짜 채용·AI 코딩 비서 설정 변조, 패치를 분석해 공격하는 '무인 자동화' 첫 포착","trend":["해커들이 중국 오픈소스 보안 커뮤니티와 연계된 공개 침투 테스트 프레임워크 'Cairn'으로 미 항공우주 기관을 해킹 — Cairn·ARTEX·CyberStrikeAI·PentAGI 등 오픈소스 AI 에이전트 도구가 해킹 기법을 스스로 결정·공유하며 다단계 침투를 자동 실행","중국 해킹 조직은 탈취한 기밀 문서를 AI로 번역·분석해 표적 기관의 조직도를 파악하고 정보 보고서를 생성 — 북한 해커는 가짜 채용 담당자로 위장해 암호화폐 기업·SW 개발자에게 접근한 뒤 AI 코딩 비서(Claude Code) 설정을 변조해 악성코드 유포","보안 패치를 자동 분석해 공격 코드를 생성·실행하는 '인간 개입 없는 완전 자동화 공격 시스템' 최초 포착 — AI 프레임워크의 낮은 진입장벽·빠른 확장성으로 보안 업데이트 적용 전에 선제 공격을 당할 위험 증대"],"impl":["방산업체·항공우주 연구기관을 겨냥한 AI 자동화 침투에 대비해 '패치 공개–적용' 간격을 시간 단위로 단축하는 패치 관리와 AI 기반 위협 탐지를 방산 보안 기준에 반영","국방·방산 개발자의 AI 코딩 도구 설정 무결성 점검과 가짜 채용 접근(북한 수법) 대응 교육·신고 체계 강화"],"related":[[8,"25.07","미국, 북한 IT 위장 취업 조직 전면 단속 공개"],[59,"26.06","CNAS 'Red Lines' — PLA AI 에이전트 항공·우주 위협"],[62,"26.07","AI, 사이버공격 전 단계 자동화 — 수 시간 내 익스플로잇"],[73,"26.10","중국 연계 해킹그룹, AI 정책 전문가 겨냥 사칭 피싱"],[75,"26.10","FBI, 북한 IT 인력 '노트북 팜' 대규모 적발"]],"trendline":"북한 IT 위장 취업 단속(25.7) → PLA AI 에이전트 위협(6월) → 수 시간 내 익스플로잇(7월) → 중국 연계 사칭 피싱(10월) → 북한 '노트북 팜'(10월) → AI 해킹 툴 실전 포착(11월): 적성국 사이버가 'AI 보조'에서 'AI 자동 실행'으로"}},"RECOMMEND":[["초지능·AI 통제","AI 모델 배포 전 의무 평가·레드팀 제도화, AI 에이전트 식별·최소 권한·즉시 차단, 국방 AI 정책의 반기 단위 갱신, 사이버·AI 사고 독립 조사 절차","배포 전 의무 평가·에이전트 통제"],["드론·무인 전력","양산 능력·공급망 검증형 드론 제조 경연, 소형 드론 '소모품' 군수 개념, 시험장 민간 개방 기한제, UGV 현장 실증 신속획득, 전문 대항군 편성","양산 검증·소모품 군수·시험장 개방"],["C2·네트워크·IT","말단 제대까지의 데이터 유통 구조 설계, 연합 C4I의 데이터 중심 보안(ACP 240) 대응, PQC 이행계획 수립, 패치 사전 검증·롤백 거버넌스","데이터 유통·ACP 240·패치 거버넌스"],["AI 사이버 공방","'패치 소요 시간' 성과지표와 AI 에이전트 방어 훈련, Daybreak급 동맹 프로그램 접근 협의, 실시간 위협 기반 클라우드 인증, 사이버 전 직무 AI 필수화","패치 시간 KPI·실시간 인증·AI 필수"],["교육·행정 AI","전략적 사고·AI 비판 검증 교육과 교육기관 독립성 유지, 대민 포털의 AI 친화 재설계, AI 대량 청구에 대비한 '인간 최종 승인' 원칙","전략적 사고 교육·인간 최종 승인"]],"WATCH":[["2026. 12. 7.","FedRAMP 신규 취약점 규정 전환 시한(유예 '27. 3. 7., 미이행 시 3. 8. 인증 취소)"],["조만간","美 국방부 PQC 전환 이행계획 발표(2030 고영향·2031 전군)"],["2027. 1월","VA.gov 추가 업데이트 / America.gov 연동 확대"],["2027년 초","DISA MPE 최소기능역량(MVC) 출시 · ZEUS 정보제공요청(RFI)"],["2027. 3월","제조 로데오 자폭드론 납품(3. 1.) · 제3회 드론 우세 건틀릿"],["2027년 말","NATO NCIA 30억 달러+ 클라우드·우주·AI 계약 발주 완료 목표"]]};
+const CIRC = '⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const $ = (s, r) => (r || document).querySelector(s), $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+const total = D.GROUPS.reduce((n, g) => n + g.items.length, 0);
+
+// ---------- render ----------
+let h = '';
+h += `<section class="hero" id="cover"><div class="wrap">
+  <div class="no">${esc(D.META.no)}</div>
+  <h1>${esc(D.META.title)}</h1>
+  <p>${esc(D.META.issue)}</p>
+  <p class="sm">${esc(D.META.scope)} · ${esc(D.META.date)} · ${esc(D.META.cover_author || D.META.author)}</p>
+  <p class="arch">아카이브 연계: ${esc(D.META.archive)} — 온톨로지 기반 선행 기사 추적</p>
+</div></section>`;
+
+h += `<section class="blk" id="es"><div class="wrap">
+  <h2 class="h2">Executive Summary</h2>
+  <div class="bluf"><div class="lab">핵심 요지 (BLUF)</div><ul>${D.BLUF.map(b => `<li>${esc(b)}</li>`).join('')}</ul></div>
+  <div class="gcards">${D.GROUPS.map((g, i) => `<a class="gcard" href="#g${i}"><div class="hd"><span class="badge">${esc(g.code)}</span>${esc(g.name)}</div><div class="msg">${esc(g.msg)}</div><div class="cnt">${g.items.map(n => '<span class="it"><i class="n">' + n + '</i>' + esc(D.LABELS[String(n)]) + '</span>').join('')}</div></a>`).join('')}</div>
+  <h3 class="sub">우리 군 정책 과제</h3>
+  <div class="recs">${D.RECOMMEND.map((r, i) => `<div class="rec"><span class="badge">${esc(D.GROUPS[i].code)}</span><div><b>${esc(r[0])}</b>${esc(r[1])}</div></div>`).join('')}</div>
+</div></section>`;
+
+D.GROUPS.forEach((g, gi) => {
+  h += `<section class="blk" id="g${gi}"><div class="wrap">
+    <div class="band"><div class="k">유형 ${esc(g.code)} · 기사 ${g.items.length}건</div><h2>${esc(g.name)}</h2><p>${esc(g.msg)}</p></div>`;
+  g.items.forEach((n, i) => {
+    const a = D.A[String(n)];
+    const nodes = a.related.map(r => ({ no: r[0], d: r[1], t: r[2] })).concat([{ no: D.META.no, d: D.META.curdate || '', t: a.label, cur: true }]);
+    h += `<article class="art" id="a${n}">
+      <header class="art-h"><span class="num">${n}</span><div><h3>${esc(a.label)}</h3>
+        <p class="meta"><b>${esc(g.code)}. ${esc(g.short)}</b> · ${i + 1}/${g.items.length}${a.src ? ' · 출처: ' + esc(a.src) : ''}</p></div></header>
+      <p class="one">${esc(a.one)}</p>
+      <button class="more" type="button" aria-expanded="false" aria-controls="d${n}"><span class="lbl">동향 · 시사점 · 연계 추이 보기</span><span class="chev" aria-hidden="true">▾</span></button>
+      <div class="detail" id="d${n}" hidden>
+        <div>
+          <section class="sec"><h4>국내외 동향</h4><ul>${a.trend.map(t => `<li>${esc(t)}</li>`).join('')}</ul></section>
+          <section class="sec impl"><h4><span class="mk">軍</span>우리 군 시사점</h4><ul>${a.impl.map(t => `<li>${esc(t)}</li>`).join('')}</ul></section>
+        </div>
+        <aside class="tl"><h4>아카이브 연계 추이 <small>온톨로지 기반 선행 기사</small></h4>
+          <ol class="track">${nodes.map((nd, k) => `<li class="node${nd.cur ? ' cur' : ''}" style="--i:${k}"><span class="dot">${esc(nd.no)}</span><span class="d">제${esc(nd.no)}호${nd.cur ? ' (금주)' : ''}${nd.d ? ' · ' + esc(nd.d) : ''}</span><span class="t">${esc(nd.t)}</span></li>`).join('')}</ol>
+          <p class="trend"><b>추이</b>${esc(a.trendline)}</p>
+        </aside>
+      </div>
+    </article>`;
+  });
+  h += `</div></section>`;
+});
+
+h += `<section class="blk" id="end"><div class="wrap">
+  <h2 class="h2">종합 정책 제언 및 주요 일정</h2>
+  <div class="close2">
+    <div><h3 class="sub" style="margin-top:0">우리 군 정책 과제 (유형별)</h3><div class="recs">${D.RECOMMEND.map((r, i) => `<div class="rec"><span class="badge">${esc(D.GROUPS[i].code)}</span><div><b>${esc(r[0])}</b>${esc(r[1])}</div></div>`).join('')}</div></div>
+    <div><h3 class="sub" style="margin-top:0">주요 일정 (Watch List)</h3><ul class="watch">${D.WATCH.map(w => `<li><b>${esc(w[0])}</b>${esc(w[1])}</li>`).join('')}</ul></div>
+  </div>
+</div></section>`;
+$('#app').innerHTML = h;
+$('#issue').textContent = D.META.issue.replace(/^.*?뉴스레터\s*/, '');
+$('#foot').textContent = `${D.META.title} 제${D.META.no}호 | ${D.META.author} | ${D.META.date}`;
+
+// chips + drawer
+const secs = [{ id: 'es', k: '', t: '요약' }].concat(D.GROUPS.map((g, i) => ({ id: 'g' + i, k: g.code, t: g.short }))).concat([{ id: 'end', k: '', t: '제언·일정' }]);
+$('#chips').innerHTML = secs.map(s => `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.k ? '<b>' + esc(s.k) + '</b>' : ''}${esc(s.t)}</a>`).join('');
+$('#panel').innerHTML = `<div class="ph">목차 · 기사 ${total}건<button class="btn" id="closeBtn" type="button">닫기</button></div>
+  <a href="#es"><i>—</i>Executive Summary</a>` +
+  D.GROUPS.map((g, i) => `<div class="g">${esc(g.code)}. ${esc(g.name)}</div>` + g.items.map(n => `<a href="#a${n}"><i>${n}</i>${esc(D.A[String(n)].label)}</a>`).join('')).join('') +
+  `<div class="g">마무리</div><a href="#end"><i>—</i>종합 정책 제언 및 주요 일정</a>`;
+
+// ---------- behaviour ----------
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hdr = $('#top'), setHH = () => document.documentElement.style.setProperty('--hh', (hdr.offsetHeight + 10) + 'px');
+setHH(); addEventListener('resize', setHH);
+
+function setOpen(art, open) {
+  const b = $('.more', art), d = $('.detail', art);
+  b.setAttribute('aria-expanded', open); d.hidden = !open;
+  $('.lbl', b).textContent = open ? '접기' : '동향 · 시사점 · 연계 추이 보기';
+}
+const arts = $$('.art'), allBtn = $('#allBtn');
+function syncAll() { const allOpen = arts.every(a => !$('.detail', a).hidden); allBtn.textContent = allOpen ? '전체 접기' : '전체 펼치기'; allBtn.setAttribute('aria-pressed', allOpen); }
+arts.forEach(a => $('.more', a).addEventListener('click', () => { setOpen(a, $('.detail', a).hidden); syncAll(); }));
+allBtn.addEventListener('click', () => { const open = !arts.every(a => !$('.detail', a).hidden); arts.forEach(a => setOpen(a, open)); syncAll(); });
+if (matchMedia('(min-width: 900px)').matches) arts.forEach(a => setOpen(a, true));
+syncAll();
+
+// timeline draw-in when visible
+if ('IntersectionObserver' in window && !reduce) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { threshold: 0.15 });
+  $$('.tl').forEach(t => { t.classList.add('pre'); io.observe(t); });
+}
+
+// in-page links: open target article, close drawer
+const drawer = $('#drawer');
+function closeDrawer() { drawer.hidden = true; document.documentElement.classList.remove('lock'); }
+function openDrawer() { drawer.hidden = false; document.documentElement.classList.add('lock'); $('#closeBtn').focus(); }
+$('#tocBtn').addEventListener('click', openDrawer);
+drawer.addEventListener('click', e => { if (e.target === drawer || e.target.id === 'closeBtn') closeDrawer(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && !drawer.hidden) closeDrawer(); });
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
+  e.preventDefault(); closeDrawer();
+  if (t.classList.contains('art')) { setOpen(t, true); syncAll(); }
+  t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  try { history.replaceState(null, '', '#' + t.id); } catch (err) {}
+});
+
+// scroll progress, active chip, back-to-top
+const prog = $('#prog'), fab = $('#fab'), chips = $('#chips'), chipEls = $$('.chip');
+let ticking = false, active = '';
+function onScroll() {
+  ticking = false;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 0) + '%';
+  fab.classList.toggle('show', scrollY > 600);
+  const line = hdr.offsetHeight + 40; let cur = '';
+  for (const s of secs) { const el = document.getElementById(s.id); if (el.getBoundingClientRect().top <= line) cur = s.id; }
+  if (cur !== active) {
+    active = cur;
+    chipEls.forEach(c => c.classList.toggle('on', c.dataset.id === cur));
+    const on = chipEls.find(c => c.dataset.id === cur);
+    if (on) chips.scrollTo({ left: on.offsetLeft - chips.clientWidth / 2 + on.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+  }
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+onScroll();
+fab.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) { if (t.classList.contains('art')) { setOpen(t, true); syncAll(); } setTimeout(() => t.scrollIntoView(), 50); } }
+</script>
+</body>
+</html>
